@@ -11,21 +11,63 @@
 // comments from yanny - keep it simple, commit often, make your git commit messages meaningful, when asking questions reach out to peers, help channels then instructors/Yanny
 
 
-console.log("JS is connected")
+// console.log("JS is connected")
 
-const $button = $('button')
-const $input = $('input')
 
-// this allows you to type in a city and get the information.
-$button.on('click', () => {
-    const city = $input.val()
-    const cityLower = city.toLowerCase();
-$.ajax(`https://api.teleport.org/api/urban_areas/slug:${cityLower}/scores`).then((data)=> {
+const $buttonList1 = $('#buttonSearch1')
+const $buttonList2 = $('#buttonSearch2')
 
-console.log(data)
+
+
+function SelectCity(){
+
+    var list1compare
+
+$buttonList1.on('click', () => {
+    const $option = $('#dropList1 option:selected').val() // gets the value from the selected item from the first list
+    console.log($option)
+$.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option}/scores`).then((data)=> {
+
+list1compare = data.categories[0]
+
+
+
+})
+console.log(list1compare)
+})
+
+$buttonList2.on('click', () => {
+    const $option2 = $('#dropList2 option:selected').val() // gets the value from the selected item from the second list
+    console.log($option2)
+$.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data)=> {
+
+var List2compare = data.categories[0]
+
+})
+console.log(list1compare, List2compare)
 })
 
 
 
+}
 
-})
+
+SelectCity()
+
+//CompareCity(list1compare, List2compare)
+
+function CompareCity(entry1,entry2){
+
+    console.log(entry1)
+
+
+}
+
+// currently have semi working functions for both selecting the values from the lists and then attempting to pull the data from them into the second CompareCity function.
+
+// next steps: test pulling data into an object array and returning it to  pull it into the CompareCity function.
+
+// questions: 
+// how come i cannot pull the data from the ajax pulls into variables even while inside the function for it
+
+// how can i pull the information into an array of objects and call for it into the comparecity function
