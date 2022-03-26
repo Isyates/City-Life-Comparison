@@ -11,63 +11,77 @@
 // comments from yanny - keep it simple, commit often, make your git commit messages meaningful, when asking questions reach out to peers, help channels then instructors/Yanny
 
 
-// console.log("JS is connected")
-
-
 const $buttonList1 = $('#buttonSearch1')
-const $buttonList2 = $('#buttonSearch2')
 
-
-
-function SelectCity(){
-
-    var list1compare
+var bigList1
+var bigList2
 
 $buttonList1.on('click', () => {
+    SelectCity(bigList1, bigList2)
+})
+
+function SelectCity() {
+
+    let list1compare
+    let List2compare
+
+
+
+    // $.ajax(`https://api.teleport.org/api/urban_areas`).then((data)=> {
+
+    // console.log(data)
+
+
+
+    // $.each(data, function (index, value) {
+    //     $('#fullList1').append($('<option/>', { 
+    //         value: "test",
+    //         text : "test2" 
+    //     }));
+    // });      
+
+    // })
+
+
+
+
+
+
     const $option = $('#dropList1 option:selected').val() // gets the value from the selected item from the first list
-    console.log($option)
-$.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option}/scores`).then((data)=> {
 
-list1compare = data.categories[0]
+    $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option}/scores`).then((data) => {
+        list1compare = data.categories
+    })
 
-
-
-})
-console.log(list1compare)
-})
-
-$buttonList2.on('click', () => {
     const $option2 = $('#dropList2 option:selected').val() // gets the value from the selected item from the second list
-    console.log($option2)
-$.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data)=> {
 
-var List2compare = data.categories[0]
-
-})
-console.log(list1compare, List2compare)
-})
-
-
-
+    $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data) => {
+        List2compare = data.categories
+        CompareCity(list1compare, List2compare, $option, $option2)
+    })
 }
 
 
-SelectCity()
 
-//CompareCity(list1compare, List2compare)
+function CompareCity(entry1, entry2, name1, name2) {
 
-function CompareCity(entry1,entry2){
+    console.log(name1, name2 + " inside compare city function")
+    console.log(entry1, entry2)
 
-    console.log(entry1)
-
-
+        for (let index = 0; index < entry1.length; index++) {
+        if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
+            console.log(`${entry1[index].name} availability is greater in ${name1} than ${name2}`)
+        } else {
+            console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
+        }
+    }
 }
 
-// currently have semi working functions for both selecting the values from the lists and then attempting to pull the data from them into the second CompareCity function.
+// now have two working lists and the beginning of the city comparison working. also got 1 button to trigger the entire search which makes more sense
+// city comparison will need to be able to confirm using a loop(?) each potion
+// next steps: still need to try and work out how to get the full city entries without manually entering them all.
+// need to figure out jquery/CSS to get character changes or maybe images displayed for showing the comparisons
 
-// next steps: test pulling data into an object array and returning it to  pull it into the CompareCity function.
-
-// questions: 
-// how come i cannot pull the data from the ajax pulls into variables even while inside the function for it
-
-// how can i pull the information into an array of objects and call for it into the comparecity function
+// questions:
+// how will i be able to get the data
+// need to rethink the steps that this program will take
