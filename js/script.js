@@ -16,34 +16,25 @@ const $buttonList1 = $('#buttonSearch1')
 var bigList1
 var bigList2
 
+
+$.ajax(`https://api.teleport.org/api/urban_areas`).then((data)=> { // this pulls the data
+
+    for (const iterator of data._links["ua:item"]) {
+        
+        var optionSelect = $(`<option value=${iterator.name.toLowerCase().replaceAll(' ','-').replaceAll('.','').replaceAll(',','')}> ${iterator.name} </option>`)
+        $(".fullList").append(optionSelect).append()
+
+    }
+})
 $buttonList1.on('click', () => {
     SelectCity(bigList1, bigList2)
 })
+
 
 function SelectCity() {
 
     let list1compare
     let List2compare
-
-
-
-    // $.ajax(`https://api.teleport.org/api/urban_areas`).then((data)=> {
-
-    // console.log(data)
-
-
-
-    // $.each(data, function (index, value) {
-    //     $('#fullList1').append($('<option/>', { 
-    //         value: "test",
-    //         text : "test2" 
-    //     }));
-    // });      
-
-    // })
-
-
-
 
 
 
@@ -57,6 +48,7 @@ function SelectCity() {
 
     $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data) => {
         List2compare = data.categories
+        console.log(list1compare)
         CompareCity(list1compare, List2compare, $option, $option2)
     })
 }
@@ -67,10 +59,10 @@ function CompareCity(entry1, entry2, name1, name2) {
 
     console.log(name1, name2 + " inside compare city function")
     console.log(entry1, entry2)
-
         for (let index = 0; index < entry1.length; index++) {
         if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
             console.log(`${entry1[index].name} availability is greater in ${name1} than ${name2}`)
+            
         } else {
             console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
         }
