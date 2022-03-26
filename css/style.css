@@ -1,3 +1,24 @@
+body {
+
+    text-align: center;
+
+}
+
+
 #infoList1{
-    align-self: center;
+    text-align: center;
+}
+
+#cityImage1{
+    height: 60%;
+    width: 60%;
+    /* filter: blur(4px); */
+    filter: opacity(0.5)
+}
+
+#cityImage2{
+    height: 60%;
+    width: 60%;
+    /* filter: blur(2px); */
+    filter: opacity(0.8);
 }

@@ -62,11 +62,27 @@ function CompareCity(entry1, entry2, name1, name2) {
         for (let index = 0; index < entry1.length; index++) {
         if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
             console.log(`${entry1[index].name} availability is greater in ${name1} than ${name2}`)
-            
+
         } else {
             console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
         }
     }
+$.ajax(`https://api.teleport.org/api/urban_areas/slug:${name1}/images/`).then((data) => {
+
+console.log(data)
+
+$("#cityImage1").attr('src', data.photos[0].image.web)
+
+})
+
+$.ajax(`https://api.teleport.org/api/urban_areas/slug:${name2}/images/`).then((data) => {
+
+console.log(data)
+
+$("#cityImage2").attr('src', data.photos[0].image.web)
+
+})
+
 }
 
 // now have two working lists and the beginning of the city comparison working. also got 1 button to trigger the entire search which makes more sense
