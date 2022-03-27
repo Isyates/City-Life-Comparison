@@ -33,8 +33,8 @@ $buttonList1.on('click', () => {
 
 function SelectCity() {
 
-    let list1compare
-    let List2compare
+    let list1compare = []
+    let List2compare = []
 
 
 
@@ -56,17 +56,49 @@ function SelectCity() {
 
 
 function CompareCity(entry1, entry2, name1, name2) {
-
+    $(".primaryvalue").remove()
+    var listOfScores1
+    var listOfScores2
+    var displayScores1
+    var displayScores2
     console.log(name1, name2 + " inside compare city function")
     console.log(entry1, entry2)
         for (let index = 0; index < entry1.length; index++) {
-        if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
-            console.log(`${entry1[index].name} availability is greater in ${name1} than ${name2}`)
+            displayScores1 = $(`<ul class=primaryvalue>${entry1[index].score_out_of_10.toFixed(2)}</ul>`)
+            // this should create the variable that is a UL with an ID of primary value at index with internal information being the score out of 10 at the index
 
-        } else {
-            console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
+            listOfScores1 = entry1[index].score_out_of_10
+
+            console.log(listOfScores1)
+
+            $(`#infoList1`).append(displayScores1)
+            // this should append the information to the infolist
         }
-    }
+
+        for (let index = 0; index < entry2.length; index++) {
+            displayScores2 = $(`<ul class=primaryvalue>${entry2[index].score_out_of_10.toFixed(2)}</ul>`)
+            // this should create the variable that is a UL with an ID of primary value at index with internal information being the score out of 10 at the index
+
+            listOfScores2 = entry1[index].score_out_of_10
+
+            console.log(listOfScores2)
+
+            $(`#infoList2`).append(displayScores2)
+            // this should append the information to the infolist
+        }
+
+
+        
+        // if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
+        //     console.log(`${entry1[index].name} availability is greater in ${name1} than ${name2}`)
+
+        // } else {
+        //     console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
+        // }
+
+
+
+
 $.ajax(`https://api.teleport.org/api/urban_areas/slug:${name1}/images/`).then((data) => {
 
 console.log(data)

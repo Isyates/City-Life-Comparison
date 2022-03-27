@@ -1,24 +1,131 @@
-body {
 
+
+body{
+    background-color: dimgray;
+}
+#infoListBase{
+    /* text-align: center; */
+    /* float: left; */
+    border: 2px solid;
+    border-color: teal;
+    width: fit-content;
+    margin:auto;
     text-align: center;
+    margin-top:65px;
+  
+   
+    
+
+    
 
 }
 
 
-#infoList1{
+button{
     text-align: center;
+    margin: auto;
+    display: flex;
+    
+}
+
+#dropList2{
+    float: right;
+    position: relative;
+}
+
+#infoList1{
+    border: 2px solid;
+    border-color: red;
+    width: 25%;
+    margin:auto;
+    text-align: center;
+    float: left;
+    position: relative;
+    margin-left: 280px;
+    width: 200px;
+}
+
+#infoList2{
+    border: 2px solid;
+    border-color: purple;
+    width: 25%;
+    /* margin:auto; */
+    margin-right: 270px;
+    text-align: center;
+    float: right;
+    position: relative;
+    width: 200px;
 }
 
 #cityImage1{
-    height: 60%;
-    width: 60%;
-    /* filter: blur(4px); */
-    filter: opacity(0.5)
+   object-fit:fill;
+    box-sizing: content-box;
+    height: 100%;
+    width: 100%;
+    filter: opacity(0.5);
+    position: relative;
+    
 }
 
 #cityImage2{
-    height: 60%;
-    width: 60%;
+    height: 100%;
+    width: 100%;
     /* filter: blur(2px); */
     filter: opacity(0.8);
+    z-index: -1;
 }
+
+
+
+
+
+
+/* 
+below this is test code for background image for larger size */
+
+/* #infoList1{
+    border: 2px solid;
+    border-color: red;
+    width: 25%;
+    margin:auto;
+    text-align: center;
+    float: left;
+    position: absolute;
+    margin-left: 185px;
+    width: 200px;
+    z-index: 0;
+}
+
+#infoList2{
+    border: 2px solid;
+    border-color: purple;
+    width: 25%;
+    /* margin:auto; */
+    /* margin-right: 185px;
+    text-align: center;
+    float: right;
+    position: relative;
+    width: 200px;
+    z-index: 0;
+} */
+
+/* #cityImage1{
+   object-fit: fill;
+    box-sizing:border-box;
+    height: 100%;
+    width:600px; 
+    filter: opacity(0.5);
+    position: inherit;
+    z-index: -1;
+    margin-left: -300px;
+     overflow: hidden;
+    
+} */
+
+/* #cityImage2{
+    height: 100%;
+    width: 100%;
+    /* filter: blur(2px); */
+    /* filter: opacity(0.8);
+    z-index: -1;
+} */
