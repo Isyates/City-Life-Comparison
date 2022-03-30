@@ -56,7 +56,8 @@ function SelectCity() {
 
 
 function CompareCity(entry1, entry2, name1, name2) {
-    $(".primaryvalue").remove()
+    $(".indexvalue").remove()
+    $(".primaryvalue").css("color,black")
     var listOfScores1
     var listOfScores2
     var displayScores1
@@ -64,7 +65,7 @@ function CompareCity(entry1, entry2, name1, name2) {
     console.log(name1, name2 + " inside compare city function")
     console.log(entry1, entry2)
         for (let index = 0; index < entry1.length; index++) {
-            displayScores1 = $(`<ul class=primaryvalue>${entry1[index].score_out_of_10.toFixed(2)}</ul>`)
+            displayScores1 = $(`<ul class=indexvalue id=1primaryvalue${index} >${entry1[index].score_out_of_10.toFixed(2)}</ul>`)
             // this should create the variable that is a UL with an ID of primary value at index with internal information being the score out of 10 at the index
 
             listOfScores1 = entry1[index].score_out_of_10
@@ -76,7 +77,7 @@ function CompareCity(entry1, entry2, name1, name2) {
         }
 
         for (let index = 0; index < entry2.length; index++) {
-            displayScores2 = $(`<ul class=primaryvalue>${entry2[index].score_out_of_10.toFixed(2)}</ul>`)
+            displayScores2 = $(`<ul class=indexvalue id=2primaryvalue${index}>${entry2[index].score_out_of_10.toFixed(2)}</ul>`)
             // this should create the variable that is a UL with an ID of primary value at index with internal information being the score out of 10 at the index
 
             listOfScores2 = entry1[index].score_out_of_10
@@ -85,6 +86,18 @@ function CompareCity(entry1, entry2, name1, name2) {
 
             $(`#infoList2`).append(displayScores2)
             // this should append the information to the infolist
+
+
+            if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
+            $(`#1primaryvalue${index}`).css("color","green")
+
+        } else if (entry1[index].score_out_of_10 < entry2[index].score_out_of_10) {
+            console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
+            $(`#2primaryvalue${index}`).css("color","green")
+        } else  if (entry1[index].score_out_of_10 == entry2[index].score_out_of_10){
+            $(`#1primaryvalue${index}`).css("color","yellow")
+            $(`#2primaryvalue${index}`).css("color","yellow")
+        }
         }
 
 
