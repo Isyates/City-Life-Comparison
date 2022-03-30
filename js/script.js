@@ -12,10 +12,8 @@
 
 
 const $buttonList1 = $('#buttonSearch1')
-
 var bigList1
 var bigList2
-
 
 $.ajax(`https://api.teleport.org/api/urban_areas`).then((data)=> { // this pulls the data
 
@@ -27,29 +25,28 @@ $.ajax(`https://api.teleport.org/api/urban_areas`).then((data)=> { // this pulls
     }
 })
 $buttonList1.on('click', () => {
+
     SelectCity(bigList1, bigList2)
 })
-
-
 function SelectCity() {
 
     let list1compare = []
     let List2compare = []
 
-
-
     const $option = $('#dropList1 option:selected').val() // gets the value from the selected item from the first list
 
     $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option}/scores`).then((data) => {
         list1compare = data.categories
-    })
 
-    const $option2 = $('#dropList2 option:selected').val() // gets the value from the selected item from the second list
+        const $option2 = $('#dropList2 option:selected').val() // gets the value from the selected item from the second list
 
-    $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data) => {
-        List2compare = data.categories
-        console.log(list1compare)
-        CompareCity(list1compare, List2compare, $option, $option2)
+        $.ajax(`https://api.teleport.org/api/urban_areas/slug:${$option2}/scores`).then((data) => {
+            List2compare = data.categories
+            console.log(list1compare)
+            CompareCity(list1compare, List2compare, $option, $option2)
+        })
+    
+        
     })
 }
 
@@ -58,19 +55,17 @@ function SelectCity() {
 function CompareCity(entry1, entry2, name1, name2) {
     $(".indexvalue").remove()
     $(".primaryvalue").css("color,black")
+
     var listOfScores1
     var listOfScores2
     var displayScores1
     var displayScores2
-    console.log(name1, name2 + " inside compare city function")
-    console.log(entry1, entry2)
+
         for (let index = 0; index < entry1.length; index++) {
             displayScores1 = $(`<ul class=indexvalue id=1primaryvalue${index} >${entry1[index].score_out_of_10.toFixed(2)}</ul>`)
             // this should create the variable that is a UL with an ID of primary value at index with internal information being the score out of 10 at the index
 
             listOfScores1 = entry1[index].score_out_of_10
-
-            console.log(listOfScores1)
 
             $(`#infoList1`).append(displayScores1)
             // this should append the information to the infolist
@@ -82,21 +77,19 @@ function CompareCity(entry1, entry2, name1, name2) {
 
             listOfScores2 = entry1[index].score_out_of_10
 
-            console.log(listOfScores2)
-
             $(`#infoList2`).append(displayScores2)
             // this should append the information to the infolist
 
 
             if (entry1[index].score_out_of_10 > entry2[index].score_out_of_10) {
-            $(`#1primaryvalue${index}`).css("color","green")
+            $(`#1primaryvalue${index}`).css("color","MediumSeaGreen")
 
         } else if (entry1[index].score_out_of_10 < entry2[index].score_out_of_10) {
             console.log(`${entry1[index].name} availability is greater in ${name2} than ${name1}`)
-            $(`#2primaryvalue${index}`).css("color","green")
+            $(`#2primaryvalue${index}`).css("color","MediumSeaGreen")
         } else  if (entry1[index].score_out_of_10 == entry2[index].score_out_of_10){
-            $(`#1primaryvalue${index}`).css("color","yellow")
-            $(`#2primaryvalue${index}`).css("color","yellow")
+            $(`#1primaryvalue${index}`).css("color","Khaki")
+            $(`#2primaryvalue${index}`).css("color","Khaki")
         }
         }
 
